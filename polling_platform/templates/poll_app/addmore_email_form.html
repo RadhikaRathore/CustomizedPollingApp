@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="list-group list-group-flush list-group-formset">
+      {% for email in existing_emails %}
+        <div class="list-group-item">
+          <div class="row">
+            <div class="col-10">
+              <a href="{% url 'email_change' poll.pk email.pk %}">{{ email.username }}</a>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <div class="list-group-item text-center">
+          <p class="text-muted font-italic mb-0">You haven't added any email yet. Go ahead and <a href="{% url 'add_email' poll.pk %}">add new email.</a></p>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="card-footer">
+      <a href="{% url 'add_email' poll.pk %}" class="btn btn-primary btn-sm">Add New Email</a>
+      <a href="{% url 'help' %}" class="btn btn-primary btn-sm">Go to help</a>
+      <a href="{% url 'send_first_link' poll.pk %}" class="btn btn-primary btn-sm">Send first Link</a>
+    </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <h2 class="mb-3">Please add choice for given poll</h2>
+  <h3>{{ poll.poll_text }}</h3>
+<form action="{% url 'vote' poll.pk emailpk %}" method="post" class="ui form">
+  {% csrf_token %}
+  {% for choice in poll.answers_poll.all %}
+  <div class="field">
+    <div class="ui radio checkbox">
+      <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" required />
+      <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+    </div>
+  </div>
+  {% endfor %}
+  <input type="submit" value="Vote" class="ui primary button" />
+  <a href="{% url 'home' %}" class="ui button">Cancel</a>
+</form>
+
+{% endblock %}

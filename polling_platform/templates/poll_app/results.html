@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <h2 class="mb-3">Results</h2>
+  <h3 class="ui header">Poll: <small>{{ poll.poll_text }}</small></h3>
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Choice</th>
+          <th>Number of Votes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for choice in poll.answers_poll.all %}
+          <tr>
+            <td>{{ choice.choice_text }}</td>
+            <td>{{ choice.votes }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+{% endblock %}
+
+

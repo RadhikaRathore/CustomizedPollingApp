@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <h2 class="mb-3">Please add choice for given poll</h2>
+  <h3>{{ poll.poll_text }}</h3>
+  <div class="row">
+    <div class="col-md-6 col-sm-8 col-12">
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="{% url 'poll_list' %}" class="btn btn-outline-secondary" role="button">cancel</a>
+      </form>
+    </div>
+  </div>
+{% endblock %}

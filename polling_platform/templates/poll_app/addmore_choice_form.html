@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <h2 class="mb-3">Please click on done to vote for given poll</h2>
+  <h3>{{ poll.poll_text }}</h3>
+    <div class="list-group list-group-flush list-group-formset">
+      {% for choice in existing_choices %}
+        <div class="list-group-item">
+          <div class="row">
+            <div class="col-10">
+              <a href="{% url 'choice_change' poll.pk email.pk %}">{{ choice.choice_text }}</a>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <div class="list-group-item text-center">
+          <p class="text-muted font-italic mb-0">You haven't added any choice yet. Go ahead and <a href="{% url 'add_choice' poll.pk email.pk %}">add new choice.</a></p>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="card-footer">
+      <a href="{% url 'add_choice' poll.pk email.pk %}" class="btn btn-primary btn-sm">Add New Choice</a>
+      <a href="{% url 'help' %}" class="btn btn-primary btn-sm">Go to help</a>
+      <a href="{% url 'change_status' poll.pk email.pk %}" class="btn btn-primary btn-sm">Done</a>
+    </div>
+    <p>*once you will click on done,we will send you a link to vote for the above poll,which will have yours added choices as well,link will be shared once all members will add answers for given poll</p>
+
+
+
+{% endblock %}
